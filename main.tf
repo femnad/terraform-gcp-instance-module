@@ -66,7 +66,7 @@ resource "google_compute_firewall" "firewall-rule" {
 
 resource "google_compute_instance" "instance" {
   name = "${var.prefix}-instance"
-  machine_type = "${var.machine_type}"
+  machine_type = var.machine_type
 
   metadata = {
     ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.body): key.key]))
@@ -79,7 +79,7 @@ resource "google_compute_instance" "instance" {
 
   boot_disk {
     initialize_params {
-      image = "${var.image}"
+      image = var.image
     }
   }
 }
