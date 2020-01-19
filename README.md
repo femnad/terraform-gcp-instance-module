@@ -9,3 +9,11 @@ A module for lazy GCP instance creation via Terraform.
 * `project`: A GCP project to user
 * `service_account_file`: A credentials file for a service account 
 * `ssh_user`: A user name to set for authorized SSH keys
+
+## Optional Input Variables
+
+* `public_traffic_from`: Firewall rule definition for allowing public traffic, e.g.:
+
+```
+{"80,443" = "tcp"}
+```

@@ -20,6 +20,12 @@ variable machine_type {
   default = "g1-small"
 }
 
+variable public_traffic_from {
+  default = {
+    "" = "icmp"
+  }
+}
+
 variable region {
   default = "europe-west-2"
 }

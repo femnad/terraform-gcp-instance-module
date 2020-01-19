@@ -32,6 +32,20 @@ resource "google_compute_firewall" "firewall-rule" {
   source_ranges = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
 }
 
+resource "google_compute_firewall" "public-traffic-rules" {
+
+  dynamic "allow" {
+    for_each = var.public_traffic_from
+
+    content {
+      protocol = allow.value
+      ports = split(",", allow.key)
+    }
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+
 resource "google_compute_instance" "instance" {
   name = "${var.prefix}-instance"
   machine_type = var.machine_type
