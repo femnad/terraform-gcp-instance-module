@@ -33,6 +33,8 @@ resource "google_compute_firewall" "firewall-rule" {
 }
 
 resource "google_compute_firewall" "public-traffic-rules" {
+  name = "allow-public-traffic"
+  network = google_compute_network.network.name
 
   dynamic "allow" {
     for_each = var.public_traffic_from
