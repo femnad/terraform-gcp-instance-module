@@ -51,6 +51,7 @@ resource "google_compute_firewall" "public-traffic-rules" {
 resource "google_compute_instance" "instance" {
   name = "${var.prefix}-instance"
   machine_type = var.machine_type
+  allow_stopping_for_update = true
 
   metadata = {
     ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.body): key.key]))
