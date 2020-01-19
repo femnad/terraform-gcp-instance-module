@@ -8,11 +8,9 @@ variable service_account_file {}
 
 variable ssh_user {}
 
-variable ssh_email {}
-
-variable managed_zone {}
-
-variable dns_name {}
+variable ssh_email {
+  default = "user@host"
+}
 
 variable image {
   default = "debian-cloud/debian-10"
