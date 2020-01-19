@@ -23,7 +23,7 @@ resource "google_compute_network" "network" {
 
 resource "google_compute_firewall" "firewall-rule" {
   name = "${var.prefix}-ssh-allower"
-  network = google_compute_network.network_of_interest.name
+  network = google_compute_network.network.name
 
   allow {
     protocol = "tcp"
