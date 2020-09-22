@@ -22,11 +22,6 @@ variable preemptible {
   default = true
 }
 
-variable public_traffic_from {
-  default = {
-  }
-}
-
 variable region {
   default = "europe-west-2"
 }
