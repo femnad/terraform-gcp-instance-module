@@ -1,7 +1,13 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13"
   required_providers {
-    google = "~> 3.4"
-    http = "~> 1.1"
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 3.4"
+    }
+    http = {
+      source  = "hashicorp/http"
+      version = "~> 1.1"
+    }
   }
 }
