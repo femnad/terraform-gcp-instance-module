@@ -4,8 +4,6 @@ variable github_user {}
 
 variable project {}
 
-variable service_account_file {}
-
 variable ssh_user {}
 
 variable ssh_email {
@@ -26,12 +24,15 @@ variable preemptible {
 
 variable public_traffic_from {
   default = {
-    "" = "icmp"
   }
 }
 
 variable region {
   default = "europe-west-2"
+}
+
+variable service_account_file {
+  default = ""
 }
 
 variable zone {

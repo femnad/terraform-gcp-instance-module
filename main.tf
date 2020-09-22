@@ -70,5 +70,6 @@ resource "google_compute_instance" "instance" {
 
   scheduling {
     preemptible = var.preemptible
+    automatic_restart = !var.preemptible
   }
 }
