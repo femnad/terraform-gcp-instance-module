@@ -17,7 +17,11 @@ variable image {
 }
 
 variable machine_type {
-  default = "g1-small"
+  default = "e2-micro"
+}
+
+variable preemptible {
+  default = true
 }
 
 variable public_traffic_from {

@@ -67,4 +67,8 @@ resource "google_compute_instance" "instance" {
       image = var.image
     }
   }
+
+  scheduling {
+    preemptible = var.preemptible
+  }
 }
