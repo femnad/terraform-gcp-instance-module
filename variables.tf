@@ -15,7 +15,7 @@ variable image {
 }
 
 variable machine_type {
-  default = "e2-micro"
+  default = "e2-small"
 }
 
 variable preemptible {
@@ -23,7 +23,7 @@ variable preemptible {
 }
 
 variable region {
-  default = "europe-west-2"
+  default = "europe-west-1"
 }
 
 variable service_account_file {
@@ -31,5 +31,5 @@ variable service_account_file {
 }
 
 variable zone {
-  default = "europe-west2-c"
+  default = "europe-west1-c"
 }
