@@ -21,11 +21,11 @@ resource "random_pet" "prefix" {
 }
 
 resource "google_compute_network" "network" {
-  name = "${prefix}-network"
+  name = "${random_pet.prefix.id}-network"
 }
 
 resource "google_compute_firewall" "firewall-rule" {
-  name = "${prefix}-ssh-allower"
+  name = "${random_pet.prefix.id}-ssh-allower"
   network = google_compute_network.network.name
 
   allow {
@@ -36,7 +36,7 @@ resource "google_compute_firewall" "firewall-rule" {
 }
 
 resource "google_compute_instance" "instance" {
-  name = "${prefix}-instance"
+  name = "${random_pet.prefix.id}-instance"
   machine_type = var.machine_type
   allow_stopping_for_update = true
 
