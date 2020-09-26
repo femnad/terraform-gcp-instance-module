@@ -17,12 +17,15 @@ provider "google" {
   zone = var.zone
 }
 
+resource "random_pet" "prefix" {
+}
+
 resource "google_compute_network" "network" {
-  name = "${var.prefix}-network"
+  name = "${prefix}-network"
 }
 
 resource "google_compute_firewall" "firewall-rule" {
-  name = "${var.prefix}-ssh-allower"
+  name = "${prefix}-ssh-allower"
   network = google_compute_network.network.name
 
   allow {
@@ -33,7 +36,7 @@ resource "google_compute_firewall" "firewall-rule" {
 }
 
 resource "google_compute_instance" "instance" {
-  name = "${var.prefix}-instance"
+  name = "${prefix}-instance"
   machine_type = var.machine_type
   allow_stopping_for_update = true
 

@@ -1,5 +1,3 @@
-variable prefix {}
-
 variable github_user {}
 
 variable project {}
