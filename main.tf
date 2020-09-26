@@ -14,7 +14,7 @@ provider "google" {
   credentials = var.service_account_file
   project     = var.project
   region      = var.region
-  zone = var.zone
+  zone        = var.zone
 }
 
 resource "random_pet" "prefix" {
@@ -25,23 +25,23 @@ resource "google_compute_network" "network" {
 }
 
 resource "google_compute_firewall" "firewall-rule" {
-  name = "${random_pet.prefix.id}-ssh-allower"
+  name    = "${random_pet.prefix.id}-ssh-allower"
   network = google_compute_network.network.name
 
   allow {
     protocol = "tcp"
-    ports = ["22"]
+    ports    = ["22"]
   }
   source_ranges = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
 }
 
 resource "google_compute_instance" "instance" {
-  name = "${random_pet.prefix.id}-instance"
-  machine_type = var.machine_type
+  name                      = "${random_pet.prefix.id}-instance"
+  machine_type              = var.machine_type
   allow_stopping_for_update = true
 
   metadata = {
-    ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.body): key.key]))
+    ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.body) : key.key]))
   }
 
   network_interface {
@@ -56,7 +56,7 @@ resource "google_compute_instance" "instance" {
   }
 
   scheduling {
-    preemptible = var.preemptible
-    automatic_restart = !var.preemptible
+    preemptible       = var.preemptible
+    automatic_restart = ! var.preemptible
   }
 }
