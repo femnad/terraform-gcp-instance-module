@@ -5,3 +5,7 @@ output "instance_ip_addr" {
 output "network_name" {
   value = google_compute_network.network.name
 }
+
+output "provisioner_ip" {
+  value = jsondecode(data.http.ipinfo.body).ip
+}
