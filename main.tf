@@ -7,7 +7,7 @@ data "http" "github" {
 }
 
 locals {
-  ssh_format_spec = format("%s:%%s %s", var.ssh_user, var.ssh_email)
+  ssh_format_spec = format("%%s %s", var.ssh_user)
 }
 
 provider "google" {

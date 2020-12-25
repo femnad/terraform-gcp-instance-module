@@ -4,10 +4,6 @@ variable project {}
 
 variable ssh_user {}
 
-variable ssh_email {
-  default = "user@host"
-}
-
 variable image {
   default = "debian-cloud/debian-10"
 }
@@ -21,7 +17,7 @@ variable preemptible {
 }
 
 variable region {
-  default = "europe-west-1"
+  default = "europe-west-2"
 }
 
 variable service_account_file {
@@ -29,5 +25,5 @@ variable service_account_file {
 }
 
 variable zone {
-  default = "europe-west1-c"
+  default = "europe-west2-c"
 }
