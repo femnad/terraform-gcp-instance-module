@@ -55,8 +55,12 @@ resource "google_compute_instance" "instance" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [attached_disk]
+  }
+
   scheduling {
     preemptible       = var.preemptible
-    automatic_restart = ! var.preemptible
+    automatic_restart = !var.preemptible
   }
 }

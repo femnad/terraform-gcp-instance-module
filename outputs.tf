@@ -9,3 +9,11 @@ output "network_name" {
 output "provisioner_ip" {
   value = jsondecode(data.http.ipinfo.body).ip
 }
+
+output "id" {
+  value = google_compute_instance.instance.id
+}
+
+output "name" {
+  value = google_compute_instance.instance.name
+}
