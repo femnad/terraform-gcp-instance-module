@@ -5,7 +5,7 @@ variable project {}
 variable ssh_user {}
 
 variable image {
-  default = "debian-cloud/debian-10"
+  default = "debian-cloud/debian-11"
 }
 
 variable machine_type {
