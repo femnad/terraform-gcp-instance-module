@@ -17,7 +17,7 @@ variable preemptible {
 }
 
 variable region {
-  default = "europe-west-2"
+  default = "europe-west2"
 }
 
 variable service_account_file {

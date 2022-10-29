@@ -38,7 +38,7 @@ resource "google_compute_instance" "instance" {
   }
 
   network_interface {
-    network = google_compute_network.network.name
+    subnetwork = google_compute_subnetwork.subnetwork.name
     access_config {}
   }
 
