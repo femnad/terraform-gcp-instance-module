@@ -1,7 +1,3 @@
-data "http" "ipinfo" {
-  url = "https://ipinfo.io/json"
-}
-
 data "http" "github" {
   url = format("https://api.github.com/users/%s/keys", var.github_user)
 }
@@ -21,18 +17,15 @@ resource "random_pet" "prefix" {
 }
 
 resource "google_compute_network" "network" {
-  name = "${random_pet.prefix.id}-network"
+  name                    = "${random_pet.prefix.id}-network"
+  auto_create_subnetworks = false
 }
 
-resource "google_compute_firewall" "firewall-rule" {
-  name    = "${random_pet.prefix.id}-ssh-allower"
-  network = google_compute_network.network.name
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-  source_ranges = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
+resource "google_compute_subnetwork" "subnetwork" {
+  name          = "${random_pet.prefix.id}-subnetwork"
+  network       = google_compute_network.network.name
+  region        = var.region
+  ip_cidr_range = "10.1.0.0/24"
 }
 
 resource "google_compute_instance" "instance" {
