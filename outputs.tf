@@ -13,3 +13,7 @@ output "id" {
 output "name" {
   value = google_compute_instance.instance.name
 }
+
+output "prefix" {
+  value = random_pet.prefix.id
+}
