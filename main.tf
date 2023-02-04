@@ -34,7 +34,7 @@ resource "google_compute_instance" "instance" {
   allow_stopping_for_update = true
 
   metadata = {
-    ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.body) : key.key]))
+    ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.request_body) : key.key]))
   }
 
   network_interface {
