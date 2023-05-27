@@ -6,13 +6,6 @@ locals {
   ssh_format_spec = format("%s:%%s %s@host", var.ssh_user, var.ssh_user)
 }
 
-provider "google" {
-  credentials = var.service_account_file
-  project     = var.project
-  region      = var.region
-  zone        = var.zone
-}
-
 resource "random_pet" "prefix" {
 }
 
