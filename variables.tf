@@ -1,7 +1,7 @@
 variable "github_user" {}
 
 variable "ssh_user" {
-  default = "null"
+  default = ""
 }
 
 variable "image" {
