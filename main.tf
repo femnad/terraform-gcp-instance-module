@@ -17,7 +17,6 @@ resource "google_compute_network" "network" {
 resource "google_compute_subnetwork" "subnetwork" {
   name          = "${random_pet.prefix.id}-subnetwork"
   network       = google_compute_network.network.name
-  region        = var.region
   ip_cidr_range = "10.1.0.0/24"
 }
 

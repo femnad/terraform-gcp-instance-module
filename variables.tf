@@ -13,11 +13,3 @@ variable "machine_type" {
 variable "preemptible" {
   default = true
 }
-
-variable "region" {
-  default = "europe-west2"
-}
-
-variable "zone" {
-  default = "europe-west2-c"
-}
