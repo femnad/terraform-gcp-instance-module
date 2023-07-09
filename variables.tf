@@ -15,3 +15,9 @@ variable "machine_type" {
 variable "preemptible" {
   default = true
 }
+
+variable "size" {
+  type = number
+  default = 10
+  description = "Image size in GiB"
+}
