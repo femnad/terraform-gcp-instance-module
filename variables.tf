@@ -5,7 +5,7 @@ variable "ssh_user" {
 }
 
 variable "image" {
-  default = "debian-cloud/debian-11"
+  default = "debian-cloud/debian-12"
 }
 
 variable "machine_type" {
