@@ -1,6 +1,8 @@
 variable "github_user" {}
 
-variable "ssh_user" {}
+variable "ssh_user" {
+  default = "null"
+}
 
 variable "image" {
   default = "debian-cloud/debian-11"

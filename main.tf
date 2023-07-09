@@ -3,7 +3,8 @@ data "http" "github" {
 }
 
 locals {
-  ssh_format_spec = format("%s:%%s %s@host", var.ssh_user, var.ssh_user)
+  ssh_user        = coalesce(var.ssh_user, var.github_user)
+  ssh_format_spec = format("%s:%%s %s@host", local.ssh_user, local.ssh_user)
 }
 
 resource "random_pet" "prefix" {
