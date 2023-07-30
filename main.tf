@@ -3,8 +3,9 @@ data "http" "github" {
 }
 
 locals {
-  ssh_user        = coalesce(var.ssh_user, var.github_user)
-  ssh_format_spec = format("%s:%%s %s@host", local.ssh_user, local.ssh_user)
+  ssh_user          = coalesce(var.ssh_user, var.github_user)
+  ssh_format_spec   = format("%s:%%s %s@host", local.ssh_user, local.ssh_user)
+  ssh_keys_metadata = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.response_body) : key.key]))
 }
 
 resource "random_pet" "prefix" {
@@ -27,7 +28,7 @@ resource "google_compute_instance" "instance" {
   allow_stopping_for_update = true
 
   metadata = {
-    ssh-keys = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.response_body) : key.key]))
+    ssh-keys = local.ssh_keys_metadata
   }
 
   network_interface {
@@ -38,7 +39,7 @@ resource "google_compute_instance" "instance" {
   boot_disk {
     initialize_params {
       image = var.image
-      size = var.size
+      size  = var.size
     }
   }
 
@@ -49,5 +50,13 @@ resource "google_compute_instance" "instance" {
   scheduling {
     preemptible       = var.preemptible
     automatic_restart = !var.preemptible
+  }
+
+  dynamic "service_account" {
+    for_each = var.service_account == null ? [] : [1]
+    content {
+      email  = var.service_account
+      scopes = var.service_account_scopes
+    }
   }
 }
