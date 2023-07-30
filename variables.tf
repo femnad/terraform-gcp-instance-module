@@ -1,29 +1,29 @@
 variable "github_user" {
-  type = string
+  type        = string
   description = "A GitHub user to lookup allowed SSH keys"
 }
 
 variable "ssh_user" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "A user name to set for authorized SSH keys, defaults to `github_user`"
 }
 
 variable "image" {
-  type = string
-  default = "debian-cloud/debian-12"
+  type        = string
+  default     = "debian-cloud/debian-12"
   description = "Image of the instance"
 }
 
 variable "machine_type" {
-  type = string
-  default = "e2-small"
+  type        = string
+  default     = "e2-small"
   description = "Instance type"
 }
 
 variable "preemptible" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Instance is preemptible?"
 }
 
