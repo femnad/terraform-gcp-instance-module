@@ -44,3 +44,42 @@ variable "service_account_scopes" {
   default     = ["cloud-platform"]
   description = "List of service account scopes"
 }
+
+variable "attached_disks" {
+  type = list(object({
+    source = string,
+    name   = string,
+  }))
+  default     = []
+  description = "List of disks to attach"
+}
+
+variable "on_host_maintenance" {
+  type        = string
+  default     = "TERMINATE"
+  description = "What to do during host maintenance, MIGRATE or TERMINATE"
+}
+
+variable "name" {
+  type        = string
+  default     = null
+  description = "Name of the instance"
+}
+
+variable "network_name" {
+  type        = string
+  default     = null
+  description = "Name of the instance's network"
+}
+
+variable "subnetwork_name" {
+  type        = string
+  default     = null
+  description = "Name of the instance's subnetwork"
+}
+
+variable "network_tier" {
+  type        = string
+  default     = "STANDARD"
+  description = "Network tier for the instance"
+}
