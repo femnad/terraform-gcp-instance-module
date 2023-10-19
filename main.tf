@@ -2,34 +2,38 @@ data "http" "github" {
   url = format("https://api.github.com/users/%s/keys", var.github_user)
 }
 
+resource "random_pet" "prefix" {
+  count = var.name == null ? 1 : 0
+}
+
 locals {
+  fallback_prefix   = length(random_pet.prefix) > 0 ? random_pet.prefix[0] : "instance-module"
   ssh_user          = coalesce(var.ssh_user, var.github_user)
   ssh_format_spec   = format("%s:%%s %s@host", local.ssh_user, local.ssh_user)
   ssh_keys_metadata = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.response_body) : key.key]))
-}
-
-resource "random_pet" "prefix" {
+  ssh_keys_metadata_map = {
+    ssh-keys = local.ssh_keys_metadata
+  }
 }
 
 resource "google_compute_network" "network" {
-  name                    = coalesce(var.network_name, "${random_pet.prefix.id}-network")
+  name                    = coalesce(var.network_name, var.name, "${local.fallback_prefix}-network")
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "subnetwork" {
-  name          = coalesce(var.subnetwork_name, "${random_pet.prefix.id}-subnetwork")
+  name          = coalesce(var.subnetwork_name, var.name, "${local.fallback_prefix}-subnetwork")
   network       = google_compute_network.network.name
   ip_cidr_range = "10.1.0.0/24"
 }
 
 resource "google_compute_instance" "instance" {
-  name                      = coalesce(var.name, "${random_pet.prefix.id}-instance")
+  name                      = coalesce(var.name, "${local.fallback_prefix}-instance")
   machine_type              = var.machine_type
   allow_stopping_for_update = true
 
-  metadata = {
-    ssh-keys = local.ssh_keys_metadata
-  }
+
+  metadata = merge(local.ssh_keys_metadata_map, var.metadata)
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnetwork.name
@@ -50,9 +54,10 @@ resource "google_compute_instance" "instance" {
   }
 
   scheduling {
-    preemptible         = var.preemptible
     automatic_restart   = !var.preemptible
     on_host_maintenance = var.on_host_maintenance
+    preemptible         = var.preemptible
+    provisioning_model  = var.spot ? "SPOT" : "STANDARD"
   }
 
   dynamic "service_account" {

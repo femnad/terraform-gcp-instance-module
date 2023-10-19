@@ -83,3 +83,15 @@ variable "network_tier" {
   default     = "STANDARD"
   description = "Network tier for the instance"
 }
+
+variable "spot" {
+  type        = bool
+  default     = false
+  description = "Spot instance?"
+}
+
+variable "metadata" {
+  type        = map(string)
+  default     = {}
+  description = "A map of metadata values"
+}

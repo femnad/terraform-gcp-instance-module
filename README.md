@@ -11,6 +11,7 @@ A module for lazy GCP instance creation via Terraform.
 * `attached_disks`: List of disks to attach, default empty, each item is an object with attributes `source` and `name`
 * `image`: Image of the instance, default `debian-cloud/debian-12`
 * `machine_type`: Instance type, default `e2-small`
+* `metadata`: Metadata values
 * `name`: Name of the instance, random if null
 * `network_name`: Name of the instance's network, random if null
 * `network_tier`: Network tier for the instance, default `STANDARD`
@@ -19,5 +20,6 @@ A module for lazy GCP instance creation via Terraform.
 * `service_account_scopes`: List of service account scopes, default `["cloud-platform"]`
 * `service_account`: Optional service account to associate with the instance
 * `size`: Image size in GiB, default `10`
+* `spot`: Is spot instance?
 * `ssh_user`: A user name to set for authorized SSH keys, defaults to `github_user`
 * `subnetwork_name`: Name of the instance's subnetwork, random if null
