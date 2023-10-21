@@ -11,7 +11,7 @@ variable "ssh_user" {
 
 variable "image" {
   type        = string
-  default     = "debian-cloud/debian-12"
+  default     = "fedora-cloud/fedora-cloud-38"
   description = "Image of the instance"
 }
 

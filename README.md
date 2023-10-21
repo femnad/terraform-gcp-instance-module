@@ -9,7 +9,7 @@ A module for lazy GCP instance creation via Terraform.
 ## Optional Input Variables
 
 * `attached_disks`: List of disks to attach, default empty, each item is an object with attributes `source` and `name`
-* `image`: Image of the instance, default `debian-cloud/debian-12`
+* `image`: Image of the instance, default `fedora-cloud/fedora-cloud-38`
 * `machine_type`: Instance type, default `e2-small`
 * `metadata`: Metadata values
 * `name`: Name of the instance, random if null
