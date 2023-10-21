@@ -21,12 +21,6 @@ variable "machine_type" {
   description = "Instance type"
 }
 
-variable "preemptible" {
-  type        = bool
-  default     = true
-  description = "Instance is preemptible?"
-}
-
 variable "size" {
   type        = number
   default     = 10
