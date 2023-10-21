@@ -22,3 +22,4 @@ A module for lazy GCP instance creation via Terraform.
 * `spot`: Is spot instance? default `true`
 * `ssh_user`: A user name to set for authorized SSH keys, defaults to `github_user`
 * `subnetwork_name`: Name of the instance's subnetwork, random if null
+* `termination_action`: Instance termination action, `STOP` or `DELETE`, defaults to `DELETE`

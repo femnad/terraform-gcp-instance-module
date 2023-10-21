@@ -54,10 +54,11 @@ resource "google_compute_instance" "instance" {
   }
 
   scheduling {
-    automatic_restart   = !var.spot
-    on_host_maintenance = var.on_host_maintenance
-    preemptible         = var.spot
-    provisioning_model  = var.spot ? "SPOT" : "STANDARD"
+    automatic_restart           = !var.spot
+    instance_termination_action = var.termination_action
+    on_host_maintenance         = var.on_host_maintenance
+    preemptible                 = var.spot
+    provisioning_model          = var.spot ? "SPOT" : "STANDARD"
   }
 
   dynamic "service_account" {

@@ -15,6 +15,12 @@ variable "image" {
   description = "Image of the instance"
 }
 
+variable "termination_action" {
+  type        = string
+  default     = "DELETE"
+  description = "Instance termination action, `STOP` or `DELETE`"
+}
+
 variable "machine_type" {
   type        = string
   default     = "e2-small"
