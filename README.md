@@ -16,10 +16,9 @@ A module for lazy GCP instance creation via Terraform.
 * `network_name`: Name of the instance's network, random if null
 * `network_tier`: Network tier for the instance, default `STANDARD`
 * `on_host_maintenance`: What to do during host maintenance, `MIGRATE` or `TERMINATE`, default `TERMINATE`
-* `preemptible`: Instance is preemptible?, default `true`
 * `service_account_scopes`: List of service account scopes, default `["cloud-platform"]`
 * `service_account`: Optional service account to associate with the instance
 * `size`: Image size in GiB, default `10`
-* `spot`: Is spot instance?
+* `spot`: Is spot instance? default `true`
 * `ssh_user`: A user name to set for authorized SSH keys, defaults to `github_user`
 * `subnetwork_name`: Name of the instance's subnetwork, random if null

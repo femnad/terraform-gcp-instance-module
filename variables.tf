@@ -80,7 +80,7 @@ variable "network_tier" {
 
 variable "spot" {
   type        = bool
-  default     = false
+  default     = true
   description = "Spot instance?"
 }
 
