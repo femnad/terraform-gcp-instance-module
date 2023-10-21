@@ -56,7 +56,7 @@ resource "google_compute_instance" "instance" {
   scheduling {
     automatic_restart   = !var.preemptible
     on_host_maintenance = var.on_host_maintenance
-    preemptible         = var.stop ? false : var.preemptible
+    preemptible         = var.spot ? false : var.preemptible
     provisioning_model  = var.spot ? "SPOT" : "STANDARD"
   }
 
