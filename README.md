@@ -23,3 +23,25 @@ A module for lazy GCP instance creation via Terraform.
 * `ssh_user`: A user name to set for authorized SSH keys, defaults to `github_user`
 * `subnetwork_name`: Name of the instance's subnetwork, random if null
 * `termination_action`: Instance termination action, `STOP` or `DELETE`, defaults to `DELETE`
+
+## Example Usage
+
+### Minimal
+
+```
+provider "google" {
+  project = <project>
+  zone    = <zone>
+}
+
+module "instance" {
+  source  = "femnad/instance-module/gcp"
+  version = "0.23.2"
+
+  github_user     = "femnad"
+
+  providers = {
+    google = google
+  }
+}
+```
