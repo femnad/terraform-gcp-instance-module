@@ -7,7 +7,7 @@ resource "random_pet" "prefix" {
 }
 
 locals {
-  fallback_prefix   = length(random_pet.prefix) > 0 ? random_pet.prefix[0] : "instance-module"
+  fallback_prefix   = length(random_pet.prefix) > 0 ? random_pet.prefix[0].id : "instance-module"
   ssh_user          = coalesce(var.ssh_user, var.github_user)
   ssh_format_spec   = format("%s:%%s %s@host", local.ssh_user, local.ssh_user)
   ssh_keys_metadata = join("\n", formatlist(local.ssh_format_spec, [for key in jsondecode(data.http.github.response_body) : key.key]))
